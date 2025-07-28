@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>项目一 - han12580</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+  <style>
+    body { margin: 0; font-family: 'Roboto', 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif; background: linear-gradient(120deg, #f6d365 0%, #fda085 100%); min-height: 100vh; color: #222; }
+    .container { max-width: 1100px; margin: 40px auto; background: rgba(255,255,255,0.97); border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.1); padding: 56px 48px; }
+    h1 { color: #f76d6d; }
+    .back { margin-bottom: 2em; display: inline-block; color: #f76d6d; text-decoration: none; }
+    .back:hover { text-decoration: underline; color: #fda085; }
+    .section { margin-bottom: 2em; }
+    .github-link { color: #fff; background: #f76d6d; padding: 8px 18px; border-radius: 6px; text-decoration: none; font-weight: bold; transition: background 0.2s; }
+    .github-link:hover { background: #fda085; }
+    @media (max-width: 600px) { .container { padding: 20px 8px; } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a class="back" href="../index.html">← Back to Home</a>
+    <h1>RC-EndoDepth</h1>
+    <div class="section">
+      <strong>Abstract:</strong>
+      <p>Maintaining depth scale consistency across video frames remains a significant challenge in endoscopic depth estimation, limiting applications like surgical navigation and 3D reconstruction. While current methods for endoscopic depth estimation perform well on single frames, they often fail to maintain a consistent depth scale across consecutive video frames. This limitation underscores the need for effective self-supervised approaches to achieve scale consistency in endoscopic depth estimation. We propose RC-EndoDepth (Relative and Scale-Consistent EndoDepth), a self-supervised depth estimation framework designed to deliver scale-consistent depth predictions. The framework operates in two stages: the first stage trains a relative depth estimation model on a large-scale endoscopic dataset, and the second stage fine-tunes the model for scale-consistent depth estimation using video sequences. To improve the stability of camera intrinsic estimation, we developed a ViT-based encoder-decoder module, enabling robust estimation even on datasets with unknown intrinsic parameters. Experimental results demonstrate that RC-EndoDepth outperforms existing methods, achieving superior relative depth and scale-consistent depth estimation performance without ground truth depth.</p>
+    </div>
+    <div class="section">
+      <strong>Framework:</strong>
+      <img src="assets/framework2.png" alt="RC-EndoDepth Framework" style="max-width:100%;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:1.5em;">
+    </div>
+    <div class="section" style="margin-bottom:0;">
+      <strong>Demo Videos:</strong>
+      <div style="display: flex; flex-wrap: wrap; gap: 24px;">
+        <div style="flex:1; min-width:240px;">
+          <div style="font-weight:bold; margin-bottom:8px;">Ours</div>
+          <video src="assets/ours.mp4" controls style="width:100%; border-radius:10px; background:#000;"></video>
+        </div>
+        <div style="flex:1; min-width:240px;">
+          <div style="font-weight:bold; margin-bottom:8px;">Others</div>
+          <video src="assets/others.mp4" controls style="width:100%; border-radius:10px; background:#000;"></video>
+        </div>
+      </div>
+    </div>
+    <div class="section" style="margin-top:2em;">
+      <a class="github-link" href="#" style="background:#ccc; color:#fff; cursor:not-allowed; pointer-events:none;">Code will be released upon paper acceptance</a>
+    </div>
+  </div>
+</body>
+</html> 
