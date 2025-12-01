@@ -29,7 +29,10 @@
     <h1>Paper Reader</h1>
     <div class="controls">
       <input id="search" class="search" placeholder="搜索标题、作者或标签..." />
-      <div style="margin-left:auto;color:#777;font-size:0.95rem">显示所有阅读笔记</div>
+      <div style="margin-left:auto;color:#777;font-size:0.95rem;display:flex;gap:8px;align-items:center">
+        <button id="exportBtn" style="background:#f76d6d;color:#fff;border:0;padding:8px 12px;border-radius:8px;cursor:pointer">导出笔记</button>
+        <label style="background:#f0f0f0;padding:6px 10px;border-radius:8px;cursor:pointer">导入笔记<input id="importFile" type="file" accept="application/json" style="display:none"></label>
+      </div>
     </div>
 
     <div id="notes"></div>
@@ -99,6 +102,56 @@
 
     // Initial load
     loadNotes();
+  </script>
+  <!-- JSZip from CDN used to create ZIP when importing notes for local download -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+  <script>
+    // Export: fetch index.json and all note pages, package into a JSON and download
+    document.getElementById('exportBtn').addEventListener('click', async ()=>{
+      try{
+        const idxRes = await fetch('papers/index.json');
+        if(!idxRes.ok) throw new Error('无法加载 papers/index.json');
+        const idx = await idxRes.json();
+        const exported = [];
+        for(const entry of idx){
+          try{
+            const pageRes = await fetch(entry.path);
+            const html = pageRes.ok ? await pageRes.text() : '';
+            exported.push({ meta: entry, html });
+          }catch(e){ exported.push({ meta: entry, html: '' }); }
+        }
+        const blob = new Blob([JSON.stringify({ exportedAt: new Date().toISOString(), notes: exported }, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a'); a.href = url; a.download = 'notes-export.json'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+      }catch(err){ alert('导出失败：' + err.message); }
+    });
+
+    // Import: accept JSON file, parse and create a ZIP containing index.json and each html file for local download
+    document.getElementById('importFile').addEventListener('change', async (ev)=>{
+      const f = ev.target.files[0]; if(!f) return;
+      try{
+        const txt = await f.text();
+        const data = JSON.parse(txt);
+        if(!data.notes) throw new Error('格式不正确：缺少 notes 字段');
+        if(typeof JSZip === 'undefined'){
+          // fallback: download the JSON as-is
+          const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+          const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'notes-import.json'; a.click(); URL.revokeObjectURL(url); return;
+        }
+        const zip = new JSZip();
+        // create index.json from meta only
+        const idx = data.notes.map(n => n.meta || {});
+        zip.file('papers/index.json', JSON.stringify(idx, null, 2));
+        // add each html file (use meta.path or fallback name)
+        data.notes.forEach(n => {
+          const path = (n.meta && n.meta.path) ? n.meta.path.replace(/^\/*/, '') : (`papers/note-${n.meta && n.meta.id ? n.meta.id : Date.now()}.html`);
+          zip.file(path, n.html || ('<!-- empty note -->'));
+        });
+        const content = await zip.generateAsync({ type: 'blob' });
+        const url = URL.createObjectURL(content); const a = document.createElement('a'); a.href = url; a.download = 'notes-import.zip'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+        alert('已生成 notes-import.zip，下载后解压并将文件放入仓库根目录以完成导入（或使用脚本自动写入）。');
+      }catch(e){ alert('导入失败：' + e.message); }
+    });
   </script>
 </body>
 </html>
