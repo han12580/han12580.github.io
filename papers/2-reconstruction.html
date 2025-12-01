@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Reconstruction Note</title>
+  <link href="/https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+  <style>
+    body{margin:0;font-family:Roboto,Arial,sans-serif;background:linear-gradient(120deg,#f6d365 0%,#fda085 100%);color:#222}
+    .container{max-width:900px;margin:36px auto;background:rgba(255,255,255,0.97);padding:28px;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.08)}
+    h1{color:#f76d6d}
+    .meta{color:#666;margin-bottom:12px}
+    pre{white-space:pre-wrap;background:#fafafa;padding:12px;border-radius:8px}
+    a.back{color:#f76d6d;text-decoration:none;display:inline-block;margin-bottom:10px}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a class="back" href="/papers.html">← 返回笔记列表</a>
+    <h1>重建结果笔记 (Reconstruction Note)</h1>
+    <div class="meta">han12580 · 2025-11-27 · #reconstruction #visualization</div>
+    <h3>摘要</h3>
+    <p>记录重建结果和可视化细节，包含重建参数与问题观察。</p>
+    <h3>观察与建议</h3>
+    <pre>
+重建观察：
+- 某些边界出现噪点，怀疑是深度不连续导致。
+- 建议：使用平滑正则化并在边界处加入权重衰减。
+    </pre>
+  </div>
+</body>
+</html>

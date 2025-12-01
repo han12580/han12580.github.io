@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>RC-EndoDepth - Note</title>
+  <link href="/https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+  <style>
+    body{margin:0;font-family:Roboto,Arial,sans-serif;background:linear-gradient(120deg,#f6d365 0%,#fda085 100%);color:#222}
+    .container{max-width:900px;margin:36px auto;background:rgba(255,255,255,0.97);padding:28px;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.08)}
+    h1{color:#f76d6d}
+    .meta{color:#666;margin-bottom:12px}
+    pre{white-space:pre-wrap;background:#fafafa;padding:12px;border-radius:8px}
+    a.back{color:#f76d6d;text-decoration:none;display:inline-block;margin-bottom:10px}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a class="back" href="/papers.html">← 返回笔记列表</a>
+    <h1>RC-EndoDepth: Relative and Scale-Consistent EndoDepth</h1>
+    <div class="meta">han12580 et al. · 2025-11-26 · #depth #self-supervised #endoscopy</div>
+    <h3>摘要</h3>
+    <p>提出了 RC-EndoDepth 框架，用于内窥镜视频的尺度一致深度估计。两阶段训练：相对深度预训练 + 视频时序尺度一致微调。使用 ViT 编码器-解码器稳定估计相机内参，在没有真值深度的情况下实现尺度一致性。实验表明在相对深度和尺度一致性上均有提升。</p>
+    <h3>要点</h3>
+    <pre>
+- 两阶段训练：相对深度预训练 + 视频时序尺度一致微调。
+- 使用 ViT 编码器-解码器稳定估计相机内参。
+- 在没有真值深度的情况下实现尺度一致性。
+    </pre>
+  </div>
+</body>
+</html>

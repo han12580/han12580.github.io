@@ -1,0 +1,5 @@
+[
+  { "id": 1, "title": "RC-EndoDepth: Relative and Scale-Consistent EndoDepth", "authors": "han12580 et al.", "date": "2025-11-26", "tags": ["depth","self-supervised","endoscopy"], "path": "papers/1-rc-endodepth.html" },
+  { "id": 2, "title": "重建结果笔记 (Reconstruction Note)", "authors": "han12580", "date": "2025-11-27", "tags": ["reconstruction","visualization"], "path": "papers/2-reconstruction.html" },
+  { "id": 3, "title": "论文阅读-Zero-Change Object Transmission (ZCOT)", "authors": "Pengzna (blog summary) / Wu et al.", "date": "2023-07-14", "tags": ["ZCOT","OSD","JVM","deduplication","distributed"], "path": "papers/3-zcot.html" }
+]
